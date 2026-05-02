@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Programação Assistida com IA</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
+  <style>
+    :root {
+      --primary: #6d28d9;
+      --secondary: #4f46e5;
+      --accent: #a78bfa;
+      --dark: #1e1b4b;
+      --light: #f5f3ff;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      color: #1e1b4b;
+      scroll-behavior: smooth;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background: var(--dark) !important;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    }
+    .navbar-brand {
+      color: var(--accent) !important;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+    .nav-link {
+      color: #c4b5fd !important;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-link:hover { color: #fff !important; }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, var(--dark) 0%, var(--secondary) 100%);
+      color: white;
+      padding: 100px 0 80px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.25rem;
+      color: #c4b5fd;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+    .hero .badge-tag {
+      background: rgba(167,139,250,0.2);
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      border-radius: 99px;
+      padding: 6px 18px;
+      font-size: 0.85rem;
+      margin: 4px;
+      display: inline-block;
+    }
+
+    /* SECTIONS */
+    section { padding: 80px 0; }
+    section:nth-child(even) { background: var(--light); }
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+    .section-subtitle {
+      color: #6b7280;
+      margin-bottom: 3rem;
+    }
+    .divider {
+      width: 60px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 2px;
+      margin: 12px 0 24px;
+    }
+
+    /* CARDS */
+    .feature-card {
+      border: none;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(109,40,217,0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+      height: 100%;
+      background: white;
+    }
+    .feature-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(109,40,217,0.15);
+    }
+    .feature-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.2rem;
+      font-size: 1.5rem;
+      color: white;
+    }
+    .feature-card h5 {
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 0.5rem;
+    }
+    .feature-card p { color: #6b7280; font-size: 0.95rem; }
+
+    /* PRACTICE CARDS */
+    .practice-card {
+      border-left: 4px solid var(--primary);
+      background: white;
+      border-radius: 12px;
+      padding: 1.8rem 2rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      margin-bottom: 1.5rem;
+    }
+    .practice-number {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.3rem;
+    }
+    .practice-card h5 { font-weight: 700; color: var(--dark); }
+    .practice-card p { color: #6b7280; margin-bottom: 0; }
+
+    /* CODE BLOCK */
+    .code-block {
+      background: #1e1b4b;
+      color: #a78bfa;
+      border-radius: 12px;
+      padding: 1.5rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      overflow-x: auto;
+    }
+
+    /* TOOLS TABLE */
+    .tools-table th {
+      background: var(--primary);
+      color: white;
+      font-weight: 600;
+    }
+    .tools-table td, .tools-table th { padding: 0.9rem 1.2rem; }
+    .tools-table tr:hover td { background: var(--light); }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark);
+      color: #a78bfa;
+      padding: 2rem 0;
+      text-align: center;
+    }
+    footer a { color: var(--accent); }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <i class="bi bi-cpu me-2"></i>Aula 05 — IA no Dev
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav ms-auto gap-2">
+          <li class="nav-item"><a class="nav-link" href="#intro">Introdução</a></li>
+          <li class="nav-item"><a class="nav-link" href="#conceito">Conceito</a></li>
+          <li class="nav-item"><a class="nav-link" href="#ferramentas">Ferramentas</a></li>
+          <li class="nav-item"><a class="nav-link" href="#praticas">Práticas</a></li>
+          <li class="nav-item"><a class="nav-link" href="#boas-praticas">Boas Práticas</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" style="padding-top: 120px;">
+    <div class="container" id="intro">
+      <div class="badge-tag"><i class="bi bi-stars me-1"></i>Aula 05</div>
+      <div class="badge-tag"><i class="bi bi-code-slash me-1"></i>Programação Assistida</div>
+      <div class="badge-tag"><i class="bi bi-robot me-1"></i>IA</div>
+      <h1>Programação<br>Assistida com IA</h1>
+      <p>Use a Inteligência Artificial como copiloto no desenvolvimento: gere, explique, refatore e depure código com eficiência.</p>
+      <a href="#conceito" class="btn btn-light btn-lg fw-bold px-4 me-2">
+        <i class="bi bi-arrow-down-circle me-2"></i>Explorar
+      </a>
+      <a href="#praticas" class="btn btn-outline-light btn-lg px-4">
+        <i class="bi bi-journal-code me-2"></i>Ver Práticas
+      </a>
+    </div>
+  </section>
+
+  <!-- CONCEITO -->
+  <section id="conceito">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title">O que é Pair Programming?</h2>
+        <div class="divider mx-auto"></div>
+        <p class="section-subtitle">Dois desenvolvedores, um código — e agora, uma IA</p>
+      </div>
+      <div class="row g-4 align-items-center">
+        <div class="col-md-6">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="bi bi-people-fill"></i></div>
+            <h5>Pair Programming Tradicional</h5>
+            <p>Dois devs trabalham juntos: o <strong>piloto</strong> escreve o código e o <strong>navegador</strong> revisa, sugere e pensa estrategicamente. Os papéis se alternam constantemente.</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="bi bi-robot"></i></div>
+            <h5>Programação Assistida com IA</h5>
+            <p>O navegador humano é substituído por uma IA. Você continua sendo o <strong>piloto</strong> — a IA é seu copiloto, revisando, gerando e depurando código em tempo real.</p>
+          </div>
+        </div>
+      </div>
+      <div class="row g-4 mt-2">
+        <div class="col-md-3 col-6">
+          <div class="feature-card text-center">
+            <div class="feature-icon mx-auto"><i class="bi bi-pencil-square"></i></div>
+            <h5>Gera código</h5>
+            <p>Cria funções e estruturas completas a partir de uma descrição</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="feature-card text-center">
+            <div class="feature-icon mx-auto"><i class="bi bi-arrow-repeat"></i></div>
+            <h5>Refatora</h5>
+            <p>Melhora legibilidade e boas práticas sem alterar o comportamento</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="feature-card text-center">
+            <div class="feature-icon mx-auto"><i class="bi bi-bug"></i></div>
+            <h5>Depura</h5>
+            <p>Identifica, explica e corrige erros no código</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="feature-card text-center">
+            <div class="feature-icon mx-auto"><i class="bi bi-book"></i></div>
+            <h5>Documenta</h5>
+            <p>Explica código linha a linha e gera documentação automaticamente</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FERRAMENTAS -->
+  <section id="ferramentas">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title">Ferramentas</h2>
+        <div class="divider mx-auto"></div>
+        <p class="section-subtitle">As principais ferramentas de programação assistida</p>
+      </div>
+      <div class="row g-4 mb-5">
+        <div class="col-md-6">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="bi bi-github"></i></div>
+            <h5>GitHub Copilot</h5>
+            <p>Integrado ao VS Code. Sugere código em tempo real, gera funções, explica, corrige e interage via chat. O modelo raciocina e usa ferramentas para agir no seu ambiente local.</p>
+            <div class="mt-3">
+              <span class="badge rounded-pill" style="background:var(--light);color:var(--primary);border:1px solid var(--accent)">VS Code</span>
+              <span class="badge rounded-pill ms-1" style="background:var(--light);color:var(--primary);border:1px solid var(--accent)">Local</span>
+              <span class="badge rounded-pill ms-1" style="background:var(--light);color:var(--primary);border:1px solid var(--accent)">Chat</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="bi bi-globe"></i></div>
+            <h5>Replit</h5>
+            <p>Ambiente de desenvolvimento online completo com IA integrada. Permite criar, executar e publicar projetos diretamente no navegador, sem instalação.</p>
+            <div class="mt-3">
+              <span class="badge rounded-pill" style="background:var(--light);color:var(--primary);border:1px solid var(--accent)">Online</span>
+              <span class="badge rounded-pill ms-1" style="background:var(--light);color:var(--primary);border:1px solid var(--accent)">Cloud</span>
+              <span class="badge rounded-pill ms-1" style="background:var(--light);color:var(--primary);border:1px solid var(--accent)">Sem instalação</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h5 class="fw-bold mb-3" style="color:var(--primary)">Ferramentas do agente (GitHub Copilot)</h5>
+      <div class="table-responsive">
+        <table class="table table-bordered tools-table">
+          <thead>
+            <tr>
+              <th>Ferramenta</th>
+              <th>Função</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>read</code></td><td>Ler arquivos do projeto</td></tr>
+            <tr><td><code>edit</code></td><td>Editar e escrever código nos arquivos</td></tr>
+            <tr><td><code>execute</code></td><td>Rodar o código e verificar a saída</td></tr>
+            <tr><td><code>search</code></td><td>Buscar arquivos e trechos no projeto</td></tr>
+            <tr><td><code>web</code></td><td>Buscar informações na internet</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-4">
+        <h6 class="fw-bold mb-2" style="color:var(--primary)">Como a IA raciocina — exemplo</h6>
+        <div class="code-block">
+          <span style="color:#e879f9">// 1. Entender o problema</span><br>
+          "O usuário quer verificar se um número é par. Vou gerar código Python."<br><br>
+          <span style="color:#e879f9">// 2. Escolher a ferramenta</span><br>
+          "Para escrever em um arquivo, vou usar `edit`."<br><br>
+          <span style="color:#e879f9">// 3. Tool call</span><br>
+          { "tool": "edit", "file": "main.py",<br>
+          &nbsp;&nbsp;"content": "n = 7\nif n % 2 == 0:\n    print('Par')\nelse:\n    print('Ímpar')" }<br><br>
+          <span style="color:#e879f9">// 4. Sistema executa → resultado volta ao modelo</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRÁTICAS -->
+  <section id="praticas">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title">Práticas Realizadas</h2>
+        <div class="divider mx-auto"></div>
+        <p class="section-subtitle">Quatro práticas utilizando GitHub Copilot no VS Code</p>
+      </div>
+
+      <div class="practice-card">
+        <div class="practice-number">Prática 1</div>
+        <h5><i class="bi bi-joystick me-2" style="color:var(--primary)"></i>IA como Copiloto</h5>
+        <p>Geração de uma função Python para verificar se um número é primo, com explicação linha a linha, documentação em Markdown e versão otimizada aplicando Clean Code. Complexidade reduzida de O(n) para O(√n).</p>
+        <div class="mt-2">
+          <span class="badge" style="background:var(--light);color:var(--primary);border:1px solid var(--accent)">num_primos.py</span>
+          <span class="badge ms-1" style="background:var(--light);color:var(--primary);border:1px solid var(--accent)">explicacao_num_primo.md</span>
+        </div>
+      </div>
+
+      <div class="practice-card">
+        <div class="practice-number">Prática 2</div>
+        <h5><i class="bi bi-arrow-repeat me-2" style="color:var(--primary)"></i>Refatoração</h5>
+        <p>Refatoração de código mal estruturado: nomes genéricos (<code>c</code>, <code>l</code>, <code>t</code>) renomeados, <code>range(len())</code> substituído por funções nativas, retorno em tupla transformado em <code>@dataclass</code> e docstrings adicionadas.</p>
+        <div class="mt-2">
+          <span class="badge" style="background:var(--light);color:var(--primary);border:1px solid var(--accent)">refatoracao.py</span>
+          <span class="badge ms-1" style="background:var(--light);color:var(--primary);border:1px solid var(--accent)">explicacao-refatoracao.md</span>
+        </div>
+      </div>
+
+      <div class="practice-card">
+        <div class="practice-number">Prática 3</div>
+        <h5><i class="bi bi-bug me-2" style="color:var(--primary)"></i>Debug com IA</h5>
+        <p>Identificação e correção de 4 erros: <strong>SyntaxError</strong> (string sem aspas), <strong>TypeError</strong> (<code>input()</code> sem conversão numérica), <strong>erro lógico</strong> (f-string sem prefixo <code>f</code>) e <strong>IndentationError</strong> (bloco <code>if</code> sem indentação).</p>
+        <div class="mt-2">
+          <span class="badge" style="background:var(--light);color:var(--primary);border:1px solid var(--accent)">debug.py</span>
+          <span class="badge ms-1" style="background:var(--light);color:var(--primary);border:1px solid var(--accent)">explicacao-debug.md</span>
+        </div>
+      </div>
+
+      <div class="practice-card">
+        <div class="practice-number">Prática 4</div>
+        <h5><i class="bi bi-book me-2" style="color:var(--primary)"></i>IA Explicando Código</h5>
+        <p>O código refatorado da Prática 2 foi submetido à IA com o prompt "Explique este código linha por linha", validando a capacidade interpretativa do modelo e a qualidade da refatoração realizada.</p>
+        <div class="mt-2">
+          <span class="badge" style="background:var(--light);color:var(--primary);border:1px solid var(--accent)">explicacao-refatoracao.md</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOAS PRÁTICAS -->
+  <section id="boas-praticas">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title">Boas Práticas</h2>
+        <div class="divider mx-auto"></div>
+        <p class="section-subtitle">Como usar IA no desenvolvimento de forma responsável</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="feature-card border-start border-success border-3">
+            <h5 class="text-success"><i class="bi bi-check-circle-fill me-2"></i>Faça</h5>
+            <ul class="mt-3 ps-3" style="color:#6b7280">
+              <li class="mb-2">Validar o código gerado antes de usar</li>
+              <li class="mb-2">Testar sempre em ambiente controlado</li>
+              <li class="mb-2">Pedir explicação para entender o que foi gerado</li>
+              <li class="mb-2">Refinar o prompt até obter o resultado esperado</li>
+              <li>Usar a IA como apoio, não como resposta final</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="feature-card border-start border-danger border-3">
+            <h5 class="text-danger"><i class="bi bi-x-circle-fill me-2"></i>Evite</h5>
+            <ul class="mt-3 ps-3" style="color:#6b7280">
+              <li class="mb-2">Copiar código sem entender o que ele faz</li>
+              <li class="mb-2">Confiar cegamente na saída da IA</li>
+              <li class="mb-2">Usar código sem testar</li>
+              <li>Depender totalmente da IA para decisões técnicas</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-5">
+        <div class="feature-card d-inline-block px-5 py-4" style="background:linear-gradient(135deg,var(--dark),var(--secondary));color:white;max-width:600px">
+          <i class="bi bi-quote fs-1" style="color:var(--accent)"></i>
+          <p class="fs-5 fw-bold mt-2 mb-0">Se você não entende o código,<br>você não deve usar esse código.</p>
+          <small style="color:#c4b5fd">— Regra de ouro da Programação Assistida com IA</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p class="mb-1"><i class="bi bi-cpu me-2"></i><strong>Aula 05 — Programação Assistida com IA</strong></p>
+      <p class="mb-0" style="font-size:0.85rem">
+        Desenvolvido com <i class="bi bi-heart-fill text-danger"></i> usando Bootstrap 5 &amp; GitHub Pages
+      </p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
